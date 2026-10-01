@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3949ab">
+<title>Digital SAT Math Intensive — Area, Volume, Triangles, Circles & SOHCAHTOA</title>
+<style>
+:root{--bg:#f5f6fa;--card:#ffffff;--ink:#1b2130;--muted:#59636f;--accent:#3949ab;--accent-dark:#2c3a92;--ok:#0e7a47;--okbg:#e9f7ef;--bad:#b3261e;--badbg:#fdeceb;--line:#dce0ea;--gold:#8a6d00;--goldbg:#fff7dd}
+*{box-sizing:border-box}
+html{color-scheme:light;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:940px;margin:0 auto;padding:0 16px 70px}
+.masthead{background:var(--card);border-bottom:1px solid var(--line)}
+.masthead-in{max-width:940px;margin:0 auto;padding:20px 16px 14px}
+h1{margin:0;font-size:1.35rem;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);font-size:.92rem;margin:6px 0 0}
+.tabs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#f2f3f8;color:var(--ink);padding:10px 16px;min-height:44px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .15s,color .15s,border-color .15s;touch-action:manipulation}
+.tab:hover{background:#e6e8f2}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab[aria-selected="true"]:hover{background:var(--accent-dark)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.panel[hidden]{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.card h2{margin:0 0 8px;font-size:1.15rem;text-wrap:balance}
+.card h3{margin:18px 0 6px;font-size:1rem}
+ul,ol{margin:6px 0;padding-left:22px}
+li{margin:5px 0}
+.obj{background:#eef0fb;border-left:4px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.term{margin:10px 0}
+.term b{color:var(--accent-dark)}
+.example{color:var(--muted);font-style:italic}
+.worked{background:#f8f9ff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}
+.trap{background:var(--badbg);border-left:4px solid var(--bad);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.mnemonic{background:var(--goldbg);border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.star{color:var(--gold);font-weight:700}
+kbd{background:#eef0fb;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:.9em}
+.btn{display:inline-block;border:0;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;font-size:.95rem;padding:12px 20px;min-height:44px;cursor:pointer;transition:background .15s;touch-action:manipulation}
+.btn:hover{background:var(--accent-dark)}
+.btn.secondary{background:#eceef7;color:var(--ink);border:1px solid var(--line)}
+.btn.secondary:hover{background:#e0e3f2}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.q{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px;margin:12px 0}
+.q p{margin:4px 0}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:10px 0}
+.choice{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;padding:9px 10px;cursor:pointer;min-height:44px;background:#fbfcff;transition:border-color .15s,background .15s}
+.choice:hover{border-color:var(--accent)}
+.choice.correct{background:var(--okbg);border-color:var(--ok)}
+.choice.incorrect{background:var(--badbg);border-color:var(--bad)}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:#eceef7;color:var(--muted);border-radius:6px;padding:2px 8px;margin-right:6px}
+.badge.hard{background:var(--goldbg);color:var(--gold)}
+.ans{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:1rem;width:150px;min-height:44px;background:#fff}
+.ans:disabled{background:#f0f1f5}
+.feedback{border-radius:8px;padding:10px 12px;margin:10px 0 2px;font-size:.93rem;overflow-wrap:break-word}
+.feedback.ok{background:var(--okbg);border-left:4px solid var(--ok)}
+.feedback.no{background:var(--badbg);border-left:4px solid var(--bad)}
+.scorebox{background:#eef0fb;border:1px solid var(--accent);border-radius:10px;padding:12px 16px;margin:12px 0;font-weight:700}
+.timer{font-variant-numeric:tabular-nums;font-size:1.5rem;font-weight:700;color:var(--accent-dark);background:#eef0fb;border:1px solid var(--line);border-radius:10px;padding:8px 16px;display:inline-block}
+.timer.low{color:var(--bad);background:var(--badbg);border-color:var(--bad)}
+.reviewItem{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0;background:#fbfcff;font-size:.93rem}
+table{border-collapse:collapse;width:100%;margin:8px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;font-size:.92rem}
+th{background:#eef0fb}
+.fx{background:#f2f3f8;border-radius:6px;padding:1px 6px;font-variant-numeric:tabular-nums}
+details{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0;background:#fbfcff}
+summary{cursor:pointer;font-weight:700;min-height:24px}
+footer{color:var(--muted);font-size:.85rem;text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="masthead">
+  <div class="masthead-in">
+    <h1>Digital SAT Math Intensive: Area, Volume, Triangles, Circles & SOHCAHTOA</h1>
+    <p class="sub">Target score: 600+ &nbsp;•&nbsp; Total session: 60 minutes &nbsp;•&nbsp; Study Notes (15 min) → Exercises (22 min) → Timed Mini-Mock (12 min + 8 min review + 5 min scoring/remediation) &nbsp;•&nbsp; Calculator/Desmos permitted throughout.</p>
+    <p class="sub">Template placeholders <b>[TOPIC]</b>, <b>[PROMPT]</b>, and <b>[THEME]</b> are preserved for reuse; this session instantiates <b>[TOPIC]</b> as “Geometry Essentials — Area, Volume, Triangles, Circles, and SOHCAHTOA.”</p>
+    <div class="tabs" role="tablist" aria-label="Session sections">
+      <button class="tab" role="tab" id="tab-notes" aria-selected="true" aria-controls="panel-notes">1. Study Notes</button>
+      <button class="tab" role="tab" id="tab-ex" aria-selected="false" aria-controls="panel-ex">2. Exercises</button>
+      <button class="tab" role="tab" id="tab-mock" aria-selected="false" aria-controls="panel-mock">3. Timed Mini-Mock</button>
+    </div>
+  </div>
+</div>
+<main class="wrap">
+  <section class="panel" id="panel-notes" role="tabpanel" aria-labelledby="tab-notes">
+    <div class="card">
+      <h2>Study Notes — Geometry Essentials (15 minutes)</h2>
+      <h3>Learning Objectives</h3>
+      <p>By the end of this session, you can:</p>
+      <div class="obj"><b>1.</b> Select and apply the correct area or volume formula (rectangles, triangles, trapezoids, circles, prisms, cylinders, spheres, cones) and compute the result within 60 seconds per item, including shaded-region subtraction problems.</div>
+      <div class="obj"><b>2.</b> Determine missing side lengths and angle measures in right triangles using the Pythagorean theorem, the 45-45-90 and 30-60-90 ratios, and similarity scale factors, and state which property justifies each step.</div>
+      <div class="obj"><b>3.</b> Use SOHCAHTOA (sin = opposite/hypotenuse, cos = adjacent/hypotenuse, tan = opposite/adjacent) to compute any side of a right triangle from one acute angle and one side, and verify each answer in the Desmos testing calculator within one keystroke sequence.</div>
+      <h3>Key Rules and Formulas</h3>
+      <ul>
+        <li><b>Triangle:</b> angles sum to 180°; area <span class="fx">A = ½bh</span> (height must be <b>perpendicular</b> to the base); third side <i>x</i> satisfies <span class="fx">|a − b| < x < a + b</span>.</li>
+        <li><b>Pythagorean theorem:</b> <span class="fx">a² + b² = c²</span>; memorized triples: 3-4-5, 5-12-13, 7-24-25, 8-15-17 (and their multiples).</li>
+        <li><b>Special right triangles:</b> 45-45-90 → sides <span class="fx">x, x, x√2</span>; 30-60-90 → sides <span class="fx">x, x√3, 2x</span> (short leg opposite 30°).</li>
+        <li><b>Similar triangles:</b> corresponding angles equal, corresponding sides proportional; a shared scale factor <i>k</i> multiplies every length.</li>
+        <li><b>Circle:</b> <span class="fx">C = 2πr = πd</span>; <span class="fx">A = πr²</span>; arc length <span class="fx">= (θ/360)·C</span>; sector area <span class="fx">= (θ/360)·πr² = ½ · arc · r</span>.</li>
+        <li><b>Volume:</b> prism/cylinder <span class="fx">V = Bh</span> (cylinder: <span class="fx">πr²h</span>); sphere <span class="fx">(4/3)πr³</span>; cone <span class="fx">(1/3)πr²h</span>; pyramid <span class="fx">(1/3)Bh</span>. Recasting a solid preserves volume.</li>
+        <li><b>SOHCAHTOA:</b> <span class="fx">sin θ = opp/hyp</span>, <span class="fx">cos θ = adj/hyp</span>, <span class="fx">tan θ = opp/adj</span> — the reference angle decides which side is “opposite.”</li>
+      </ul>
+      <h3>Academic Vocabulary</h3>
+      <div class="term"><b>Area</b> — the measure of a surface region, expressed in square units. <span class="example">Example: The area of the circle is 36π square centimeters.</span></div>
+      <div class="term"><b>Volume</b> — the capacity of a three-dimensional solid, expressed in cubic units. <span class="example">Example: Recasting the sphere into a cylinder preserves its volume but not its shape.</span></div>
+      <div class="term"><b>Sector</b> — the region bounded by two radii and the arc between them. <span class="example">Example: A 45° sector occupies one-eighth of the circle’s area.</span></div>
+      <div class="term"><b>Hypotenuse</b> — the longest side of a right triangle, opposite the right angle. <span class="example">Example: The ladder is the hypotenuse of the right triangle formed by the wall and the ground.</span></div>
+      <div class="term"><b>Scale factor</b> — the constant ratio linking corresponding sides of similar figures. <span class="example">Example: Because the triangles are similar, the tree’s height equals the person’s height multiplied by the scale factor.</span></div>
+      <div class="term"><b>Pythagorean triple</b> — three positive integers satisfying <span class="fx">a² + b² = c²</span>, such as 7-24-25. <span class="example">Example: Recognizing the 7-24-25 Pythagorean triple removes the need to compute a square root.</span></div>
+      <h3>Worked Examples with Thinking Steps</h3>
+      <div class="worked">
+        <b>Example 1 — Shaded region (circle and inscribed square).</b> A square is inscribed in a circle of radius 6. Find the area inside the circle but outside the square.
+        <div class="step"><b>Step 1:</b> Compute the whole: circle area = π(6)² = 36π.</div>
+        <div class="step"><b>Step 2:</b> Relate the figures: the square’s diagonal equals the circle’s diameter, 12.</div>
+        <div class="step"><b>Step 3:</b> Square area = diagonal²/2 = 144/2 = 72 (equivalently side = 12/√2 = 6√2, area = 72).</div>
+        <div class="step"><b>Step 4:</b> Subtract: 36π − 72 ≈ 41.1 square units. <b>Desmos:</b> type <kbd>36 × pi − 72</kbd> then <kbd>enter</kbd> to check the decimal.</div>
+      </div>
+      <div class="worked">
+        <b>Example 2 — 30-60-90 triangle.</b> The hypotenuse of a 30-60-90 triangle is 20. Find the longer leg.
+        <div class="step"><b>Step 1:</b> Recall the ratio x : x√3 : 2x, where 2x is the hypotenuse.</div>
+        <div class="step"><b>Step 2:</b> Set 2x = 20, so x = 10 (the short leg).</div>
+        <div class="step"><b>Step 3:</b> Longer leg = 10√3 ≈ 17.3. <b>Desmos:</b> type <kbd>10√3</kbd> or <kbd>10 × sqrt(3)</kbd> then <kbd>enter</kbd>. Trap warning: never multiply the hypotenuse by √3 — the hypotenuse is the <i>largest</i> value.</div>
+      </div>
+      <div class="worked">
+        <b>Example 3 — SOHCAHTOA.</b> In a right triangle, an acute angle measures 27° and the hypotenuse is 15. Find the side opposite the angle.
+        <div class="step"><b>Step 1:</b> Label relative to the 27° angle: opposite = unknown, hypotenuse = 15.</div>
+        <div class="step"><b>Step 2:</b> Opposite and hypotenuse → sine: sin 27° = opp/15.</div>
+        <div class="step"><b>Step 3:</b> opp = 15 · sin 27° ≈ 6.8. <b>Desmos keystrokes:</b> <kbd>15 × sin(27°)</kbd> then <kbd>enter</kbd> → 6.809…; confirm <b>Deg</b> mode (the SAT Desmos calculator defaults to degrees — do not toggle to radians).</div>
+      </div>
+      <h3>Common Traps and How to Avoid Them</h3>
+      <div class="trap"><b>Trap 1 — Diameter used as radius.</b> If the item says “diameter 10,” then r = 5 and area = 25π, not 100π (a 4× error). <b>Avoid:</b> underline r or d in the prompt before choosing a formula.</div>
+      <div class="trap"><b>Trap 2 — Non-perpendicular height.</b> The slanted side of a parallelogram is not its height; the height forms a right angle with the base. <b>Avoid:</b> draw the perpendicular dashed line first.</div>
+      <div class="trap"><b>Trap 3 — Missing fractions.</b> Omitting ½ (triangle), ⅓ (cone/pyramid), or 4/3 (sphere) is the most frequent volume error. <b>Avoid:</b> copy the formula from the SAT reference sheet before substituting.</div>
+      <div class="trap"><b>Trap 4 — Form mismatch.</b> If choices contain both 25π and 78.5, decide — from the question stem — whether the answer is required “in terms of π” or “to the nearest tenth.” <b>Avoid:</b> re-read the final sentence of the stem.</div>
+      <div class="trap"><b>Trap 5 — Sector vs. arc.</b> A sector has area (square units); an arc has length (linear units). Wrong choices frequently present the arc length for a sector-area question. <b>Avoid:</b> check the units requested in the stem.</div>
+      <h3>Quick Mnemonic and Pre-Answer Checklist — P.A.T.H.</h3>
+      <div class="mnemonic">
+        <b>P — Perpendicular?</b> Is the height perpendicular to the base?<br>
+        <b>A — Answer form?</b> Units, “in terms of π” or decimal, rounding as directed.<br>
+        <b>T — Trap-check.</b> Radius or diameter? Whole or shaded? Sector or arc?<br>
+        <b>H — Half/Third.</b> Apply ½ (triangle), ⅓ (cone), 4/3 (sphere), and θ/360 (circle fractions) before finalizing.
+      </div>
+      <h3>Differentiation</h3>
+      <ul>
+        <li><b>Support (aiming at 600):</b> Keep the SAT formula reference visible; complete Items 1–8 untimed with the worked examples side by side; re-attempt ★ items after reading the trap notes.</li>
+        <li><b>Extension (aiming at 750+):</b> Complete Items 1–8 without a calculator and each ★ item in under 90 seconds; explain why sector area equals ½ × arc × radius as a proof of the θ/360 rule.</li>
+      </ul>
+      <h3>Desmos Testing-Calculator Quick Reference</h3>
+      <ul>
+        <li><b>π:</b> type <kbd>pi</kbd>; Desmos converts it automatically.</li>
+        <li><b>Square root:</b> type <kbd>sqrt(</kbd> or use the √ function key.</li>
+        <li><b>Trigonometry:</b> type <kbd>sin(27)</kbd>, <kbd>cos(34)</kbd>, <kbd>tan(52)</kbd>; confirm <b>Deg</b> mode before computing.</li>
+        <li><b>Circle fractions:</b> enter the whole expression in one line, e.g. <kbd>45 ÷ 360 × 12^2 × pi</kbd>.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="panel" id="panel-ex" role="tabpanel" aria-labelledby="tab-ex" hidden>
+    <div class="card">
+      <h2>Exercises — 12 Items (22 minutes)</h2>
+      <p><b>Student instructions:</b> Complete Items 1–12 in order. Suggested pacing: about 1 minute each for Items 1–4, 90 seconds each for Items 5–8, and 2 minutes each for the ★ Items 9–12 (second-module difficulty). Multiple-choice items require one answer; student-produced items require a numeric answer entered in the box (enter digits only; round only when the item directs). A calculator (Desmos) is permitted on every item. Select <b>Check Answers</b> to receive instant feedback and a score.</p>
+      <div id="ex-items"></div>
+      <button class="btn" id="ex-check" type="button">Check Answers</button>
+      <button class="btn secondary" id="ex-reset" type="button" hidden>Reset Exercises</button>
+      <div id="ex-score" class="scorebox" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+  <section class="panel" id="panel-mock" role="tabpanel" aria-labelledby="tab-mock" hidden>
+    <div class="card">
+      <h2>Mini-Mock Exam — Module 2 (Hard) Simulation (12 minutes)</h2>
+      <p><b>Task:</b> This mini-mock simulates a challenging Digital SAT math module covering area, volume, triangles, circles, and right-triangle trigonometry. Answer all 8 questions in 12 minutes (approximately 90 seconds per question). Four items are marked ★ (hard, second-module difficulty). Work without notes; the Desmos calculator is permitted. Answers are scored automatically when you select <b>Submit Mock</b> or when the timer expires.</p>
+      <p><b>Student instructions:</b> Select <b>Start Mock</b> to begin the countdown. Answer every question; there is no penalty for incorrect answers. When time expires, the mock is submitted automatically. After submission, review each item with the provided explanations before reading the scoring guide.</p>
+      <p class="timer" id="mock-clock" aria-label="Time remaining">12:00</p>
+      <p>
+        <button class="btn" id="mock-start" type="button">Start Mock</button>
+        <button class="btn" id="mock-submit" type="button" disabled>Submit Mock</button>
+        <button class="btn secondary" id="mock-reset" type="button" hidden>Restart Mock</button>
+      </p>
+      <div id="mock-live" role="status" aria-live="polite"></div>
+      <div id="mock-items"></div>
+      <div id="mock-review"></div>
+      <details>
+        <summary>Scoring Guide (SAT 200–800 scale, approximate)</summary>
+        <p>Convert your raw score (0–8) to an estimated Digital SAT Math section score. This mapping is an instructional estimate: 8 items cannot replicate official adaptive scaling, so treat the result as a progress indicator, not an official score.</p>
+        <table>
+          <tr><th>Raw Score</th><th>Estimated Section Score</th><th>Guidance</th></tr>
+          <tr><td>8</td><td>780–800</td><td>Proceed to a full-length adaptive practice test.</td></tr>
+          <tr><td>7</td><td>740–770</td><td>Target: eliminate one careless error via the P.A.T.H. checklist.</td></tr>
+          <tr><td>6</td><td>690–730</td><td>On track for 600+; drill the two missed concepts tonight.</td></tr>
+          <tr><td>5</td><td>640–680</td><td>Solid; re-work ★ items with both solution paths.</td></tr>
+          <tr><td>4</td><td>580–620</td><td>Borderline; repeat the exercise set before re-testing.</td></tr>
+          <tr><td>0–3</td><td>Below 580</td><td>Return to Study Notes; use the support-tier differentiation path.</td></tr>
+        </table>
+      </details>
+    </div>
+  </section>
+</main>
+<footer>Digital SAT Math Intensive — self-contained practice file. Run offline by double-clicking. Placeholders [TOPIC], [PROMPT], [THEME] preserved for template reuse.</footer>
+<script id="quiz-data" type="application/json">
+{
+"meta":{"exerciseMinutes":22,"mockMinutes":12,"exerciseCount":12,"mockCount":8},
+"exercises":[
+{"id":"E1","level":"Easy","hard":false,"spr":false,"prompt":"A rectangle has a perimeter of 36 centimeters. Its length is twice its width. What is the area, in square centimeters, of the rectangle?","choices":["18","72","144","324"],"answerIdx":1,"reasons":["18 reports the semi-perimeter (length + width) instead of the area.","Correct: 2(l + w) = 36 gives l + w = 18; with l = 2w, 3w = 18, so w = 6 and l = 12; area = 12 × 6 = 72.","144 assumes a 12 × 12 square, ignoring the length-is-twice-width condition.","324 squares the semi-perimeter (18²) instead of multiplying length by width."]},
+{"id":"E2","level":"Easy","hard":false,"spr":false,"prompt":"A circle has a diameter of 10 centimeters. What is its area, in terms of π?","choices":["10π","25π","50π","100π"],"answerIdx":1,"reasons":["10π is the circumference, not the area.","Correct: r = 10/2 = 5, so area = π(5)² = 25π square centimeters.","50π multiplies the diameter by 5π instead of squaring the radius.","100π squares the diameter (10²) instead of the radius."]},
+{"id":"E3","level":"Easy","hard":false,"spr":false,"prompt":"A rectangular box has a length of 4 inches, a width of 5 inches, and a height of 10 inches. What is the volume of the box, in cubic inches?","choices":["19","38","200","1000"],"answerIdx":2,"reasons":["19 adds the three dimensions rather than multiplying them.","38 doubles the sum of the dimensions.","Correct: V = lwh = 4 × 5 × 10 = 200 cubic inches.","1000 assumes a 10 × 10 × 10 cube, ignoring two of the dimensions."]},
+{"id":"E4","level":"Easy","hard":false,"spr":true,"prompt":"A triangle has a base of 12 centimeters and a height of 9 centimeters. What is the area, in square centimeters?","answer":"54","accept":["54"],"why":"A = ½bh = ½ × 12 × 9 = 54 square centimeters. Trap: omitting the ½ gives 108."},
+{"id":"E5","level":"Medium","hard":false,"spr":false,"prompt":"A right circular cylinder has a radius of 3 and a height of 10. What is its volume, in terms of π?","choices":["30π","60π","90π","270π"],"answerIdx":2,"reasons":["30π divides the volume by 3 — this is the cone formula, not the cylinder formula.","60π is the lateral surface area, 2πrh.","Correct: V = πr²h = π × 3² × 10 = 90π.","270π uses a height of 30 instead of 10."]},
+{"id":"E6","level":"Medium","hard":false,"spr":false,"prompt":"In a 30-60-90 right triangle, the hypotenuse has a length of 20. What is the length of the longer leg?","choices":["5√3","10","10√3","20√3"],"answerIdx":2,"reasons":["5√3 divides the hypotenuse by 4 before multiplying by √3.","10 is the shorter leg, not the longer leg.","Correct: the sides are x, x√3, and 2x with 2x = 20, so x = 10 and the longer leg is 10√3.","20√3 multiplies the hypotenuse by √3, reversing the ratio; the hypotenuse must be the largest value."]},
+{"id":"E7","level":"Medium","hard":false,"spr":true,"prompt":"The circumference of a circle is 24π inches. An arc of the circle has a central angle of 120°. The length of this arc is aπ inches. What is the value of a?","answer":"8","accept":["8"],"why":"Arc length = (120/360) × 24π = (1/3)(24π) = 8π, so a = 8. Trap: multiplying by 24/360 ≈ 0.0667 as a full-turn length reverses the fraction."},
+{"id":"E8","level":"Medium","hard":false,"spr":true,"prompt":"In a right triangle, one acute angle measures 27° and the hypotenuse has a length of 15. What is the length of the side opposite the 27° angle, rounded to the nearest tenth?","answer":"6.8","accept":["6.8","6.81","6.809"],"why":"sin 27° = opposite/15, so opposite = 15 × sin 27° ≈ 6.8. Desmos keystrokes: 15 × sin(27°), then enter (confirm degree mode). Trap: using cos 27° finds the adjacent leg (≈ 13.4).","desmos":"Keystrokes: 15 × sin(27°), then enter → 6.809… Confirm Deg mode.","trap":"Choosing cos instead of sin computes the adjacent side, ≈ 13.4 — verify opposite/adjacent relative to the 27° angle."},
+{"id":"E9","level":"Hard","hard":true,"spr":false,"prompt":"★ A circle has a radius of 12. A sector of the circle has a central angle of 45°. What is the area of the sector, in terms of π?","choices":["3π","18π","36π","144π"],"answerIdx":1,"reasons":["3π is the arc length, not the area.","Correct: sector area = (45/360) × π × 12² = (1/8)(144π) = 18π.","36π doubles the central angle to 90° before applying the fraction.","144π is the area of the entire circle."],"secondPath":"Sector area = ½ × arc length × radius: arc = (45/360) × 2π × 12 = 3π, so area = ½ × 3π × 12 = 18π.","desmos":"Keystrokes: 45 ÷ 360 × 12^2 × pi, then enter → 18π.","trap":"Choice A (3π) is the arc length — the classic sector/arc swap; sector answers carry square units."},
+{"id":"E10","level":"Hard","hard":true,"spr":false,"prompt":"★ A square is inscribed in a circle with radius 6. What is the area of the region inside the circle but outside the square?","choices":["36π − 144","36π − 72","36π − 36","36π − 18"],"answerIdx":1,"reasons":["36π − 144 treats the diameter (12) as the side of the square.","Correct: circle area = 36π; diagonal = 2r = 12, so side = 6√2 and square area = 72; difference = 36π − 72.","36π − 36 treats the radius (6) as the side of the square.","36π − 18 uses half the squared radius as the square's area."],"secondPath":"Square area = diagonal²/2 = 12²/2 = 72, so the shaded region = 36π − 72; Desmos check: 36 × pi − 72 ≈ 41.1.","desmos":"Keystrokes: 36 × pi − 72, then enter → 41.097…, the decimal equivalent.","trap":"A sketch drawn too small suggests the side equals the radius (36π − 36); the square's vertices must lie on the circle, forcing the diagonal — not the side — to equal the diameter."},
+{"id":"E11","level":"Hard","hard":true,"spr":true,"prompt":"★ A person 1.8 meters tall casts a shadow 2.4 meters long. At the same time of day, a nearby tree casts a shadow 18 meters long. What is the height of the tree, in meters?","answer":"13.5","accept":["13.5","13.50"],"why":"The sun's rays form similar right triangles, so height/shadow is constant: h = 1.8 × (18/2.4) = 13.5 meters.","secondPath":"Scale factor: 18 ÷ 2.4 = 7.5, so the tree's height = 1.8 × 7.5 = 13.5 meters.","desmos":"Keystrokes: 1.8 × 18 ÷ 2.4, then enter → 13.5.","trap":"Inverting the proportion (1.8/2.4 = 18/h) produces the trap value 24; shadow length is proportional to height, not inversely proportional."},
+{"id":"E12","level":"Hard","hard":true,"spr":true,"prompt":"★ A solid metal sphere with radius 6 is melted and recast as a right circular cylinder with radius 4. What is the height of the cylinder?","answer":"18","accept":["18"],"why":"Volume is conserved: (4/3)π(6)³ = π(4)²h, so 288π = 16πh and h = 18.","secondPath":"Cancel π and compute numerically: sphere volume = (4/3)(216) = 288; cylinder base area = 4² = 16; h = 288 ÷ 16 = 18.","desmos":"Keystrokes: (4/3) × 6^3 ÷ 4^2, then enter → 18.","trap":"Omitting the cube in the sphere formula ((4/3)πr²) yields h = 12; also confirm the cylinder's radius is 4 — using diameter 4 (radius 2) yields h = 72."}
+],
+"mock":[
+{"id":"M1","level":"Easy","hard":false,"spr":false,"prompt":"In a triangle, two angles measure 47° and 71°. What is the measure, in degrees, of the third angle?","choices":["62","71","118","109"],"answerIdx":0,"reasons":["Correct: the angles of a triangle sum to 180°, so the third angle = 180 − 47 − 71 = 62°.","71 assumes the third angle equals the second angle with no justification.","118 subtracts the correct third angle from 180 instead of computing it.","109 subtracts only the 71° angle from 180 and forgets the 47° angle."]},
+{"id":"M2","level":"Easy","hard":false,"spr":true,"prompt":"A trapezoid has parallel bases of lengths 8 and 12 and a height of 5. What is its area?","answer":"50","accept":["50"],"why":"A = ½(b₁ + b₂)h = ½ × (8 + 12) × 5 = 50. Trap: omitting the ½ gives 100."},
+{"id":"M3","level":"Medium","hard":false,"spr":false,"prompt":"The area of a circle is 49π. What is its circumference, in terms of π?","choices":["7π","14π","49π","98π"],"answerIdx":1,"reasons":["7π is the radius expressed in the same form, not the circumference.","Correct: πr² = 49π gives r = 7, so C = 2πr = 14π.","49π repeats the given area instead of computing the circumference.","98π doubles the area coefficient instead of applying C = 2πr."]},
+{"id":"M4","level":"Medium","hard":false,"spr":true,"prompt":"In a right triangle, cos 34° = 9/x, where x is the length of the hypotenuse. What is the value of x, rounded to the nearest tenth?","answer":"10.9","accept":["10.9","10.86","10.856","10.85"],"why":"cos 34° = adjacent/hypotenuse = 9/x, so x = 9 ÷ cos 34° ≈ 10.9. Desmos keystrokes: 9 ÷ cos(34°), then enter. Trap: multiplying (9 × cos 34° ≈ 7.5) inverts the relationship.","desmos":"Keystrokes: 9 ÷ cos(34°), then enter → 10.857… Confirm Deg mode.","trap":"9 × cos 34° ≈ 7.5 results from multiplying instead of dividing; the hypotenuse must exceed the adjacent leg."},
+{"id":"M5","level":"Hard","hard":true,"spr":false,"prompt":"★ A right circular cylinder has a diameter of 8 and a height of 12. What is its volume, in terms of π?","choices":["48π","96π","192π","768π"],"answerIdx":2,"reasons":["48π divides the correct volume by 3 — the cone formula.","96π is the lateral surface area, 2πrh.","Correct: r = 8/2 = 4, so V = πr²h = π × 16 × 12 = 192π.","768π uses the diameter 8 as the radius."],"trap":"The word diameter is the trap: halve it first (r = 4). Choice D shows exactly what happens when you do not."},
+{"id":"M6","level":"Hard","hard":true,"spr":false,"prompt":"★ A square has an area of 72. What is the length of its diagonal?","choices":["6","12","6√2","12√2"],"answerIdx":1,"reasons":["6 is the side of a square with area 36, half the given area.","Correct: diagonal = √(2 × area) = √144 = 12.","6√2 is the side length (√72), not the diagonal.","12√2 doubles the side instead of applying the √2 ratio."],"secondPath":"45-45-90 route: side = √72 = 6√2; the diagonal is the hypotenuse, so d = 6√2 × √2 = 12.","desmos":"Keystrokes: sqrt(2 × 72), then enter → 12."},
+{"id":"M7","level":"Hard","hard":true,"spr":true,"prompt":"★ A circle has a radius of 10. A sector of the circle has a central angle of 54°. The area of the sector is aπ. What is the value of a?","answer":"15","accept":["15"],"why":"Sector area = (54/360) × π × 10² = 0.15 × 100π = 15π, so a = 15.","secondPath":"Sector = ½ × arc × radius: arc = (54/360) × 20π = 3π, so area = ½ × 3π × 10 = 15π.","desmos":"Keystrokes: 54 ÷ 360 × 10^2, then enter → 15.","trap":"3 is the arc length (3π) in linear units; the question asks for an area, which uses square units."},
+{"id":"M8","level":"Hard","hard":true,"spr":true,"prompt":"★ A 25-foot ladder leans against a vertical wall with its base 7 feet from the wall. How many feet above the ground does the ladder reach on the wall?","answer":"24","accept":["24"],"why":"7-24-25 is a Pythagorean triple (49 + 576 = 625), so the ladder reaches 24 feet.","secondPath":"h = √(25² − 7²) = √(625 − 49) = √576 = 24.","desmos":"Keystrokes: sqrt(25^2 − 7^2), then enter → 24.","trap":"25 − 7 = 18 (subtracting lengths) and √(625 + 49) ≈ 26 (adding squares) are common trap computations; the ladder is the hypotenuse, so the legs satisfy a² + b² = 25²."}
+],
+"scoring":[
+{"raw":8,"est":"780–800"},
+{"raw":7,"est":"740–770"},
+{"raw":6,"est":"690–730"},
+{"raw":5,"est":"640–680"},
+{"raw":4,"est":"580–620"},
+{"raw":0,"est":"Below 580"}
+]
+}
+</script>
+<script>
+(function(){
+"use strict";
+var DATA=JSON.parse(document.getElementById("quiz-data").textContent);
+var LETTERS=["A","B","C","D"];
+function $(id){return document.getElementById(id);}
+function esc(s){var d=document.createElement("div");d.textContent=String(s);return d.innerHTML;}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+/* ---------- Tabs ---------- */
+var tabs=[].slice.call(document.querySelectorAll(".tab"));
+function selectTab(t){
+  tabs.forEach(function(x){
+    var on=(x===t);
+    x.setAttribute("aria-selected",on?"true":"false");
+    document.getElementById(x.getAttribute("aria-controls")).hidden=!on;
+  });
+}
+tabs.forEach(function(t,i){
+  t.addEventListener("click",function(){selectTab(t);});
+  t.addEventListener("keydown",function(ev){
+    var n=null;
+    if(ev.key==="ArrowRight")n=tabs[(i+1)%tabs.length];
+    if(ev.key==="ArrowLeft")n=tabs[(i-1+tabs.length)%tabs.length];
+    if(n){ev.preventDefault();n.focus();selectTab(n);}
+  });
+});
+
+/* ---------- Item rendering ---------- */
+function renderItem(q,i,prefix,disabled){
+  var box=el("div","q");box.id=prefix+"q"+i;
+  var badges='<span class="badge'+(q.hard?" hard":"")+'">'+esc(q.level)+'</span>'+(q.hard?'<span class="star">★</span>':"");
+  box.appendChild(el("p",null,badges+"<b>Item "+(i+1)+".</b> "+esc(q.prompt)));
+  if(q.spr){
+    var lab=el("label",null,"Your answer: ");
+    var inp=document.createElement("input");
+    inp.type="text";inp.className="ans";inp.name=prefix+i;inp.autocomplete="off";
+    inp.spellcheck=false;inp.setAttribute("inputmode","decimal");
+    inp.setAttribute("aria-label","Your answer for Item "+(i+1));
+    inp.disabled=disabled;lab.appendChild(inp);box.appendChild(lab);
+  }else{
+    var grid=el("div","choices");
+    q.choices.forEach(function(c,j){
+      var lab=el("label","choice");
+      lab.htmlFor=prefix+i+"_"+j;
+      var r=document.createElement("input");r.type="radio";r.name=prefix+i;r.value=j;r.id=prefix+i+"_"+j;r.disabled=disabled;
+      lab.appendChild(r);lab.appendChild(el("span",null,"<b>"+LETTERS[j]+".</b> "+esc(c)));
+      grid.appendChild(lab);
+    });
+    box.appendChild(grid);
+  }
+  var fb=el("div","feedback","");fb.hidden=true;box.appendChild(fb);
+  return box;
+}
+function extras(q){
+  var h="";
+  if(q.secondPath)h+="<div><b>Second solution path:</b> "+esc(q.secondPath)+"</div>";
+  if(q.desmos)h+="<div><b>Desmos:</b> "+esc(q.desmos)+"</div>";
+  if(q.trap)h+="<div><b>Trap warning:</b> "+esc(q.trap)+"</div>";
+  return h;
+}
+function sprMatches(raw,item){
+  var v=String(raw).trim().replace(/,/g,"").replace(/\s+/g,"");
+  if(!v)return false;
+  var n=parseFloat(v);
+  return item.accept.some(function(a){
+    var an=parseFloat(a);
+    if(!isNaN(n)&&!isNaN(an))return Math.abs(n-an)<=0.051;
+    return v===String(a).trim();
+  });
+}
+function setFb(box,ok,html){var f=box.querySelector(".feedback");f.hidden=false;f.className="feedback "+(ok?"ok":"no");f.innerHTML=html;}
+
+/* ---------- Exercises ---------- */
+function renderExercises(){
+  var host=$("ex-items");host.innerHTML="";
+  DATA.exercises.forEach(function(q,i){host.appendChild(renderItem(q,i,"ex",false));});
+  $("ex-score").textContent="";
+  $("ex-check").disabled=false;$("ex-check").hidden=false;$("ex-reset").hidden=true;
+}
+function checkExercises(){
+  var correct=0,answered=0;
+  DATA.exercises.forEach(function(q,i){
+    var box=$("exq"+i);
+    if(q.spr){
+      var v=box.querySelector("input").value;
+      if(v.trim())answered++;
+      if(sprMatches(v,q)){correct++;setFb(box,true,"<b>Correct.</b> "+esc(q.why)+extras(q));}
+      else setFb(box,false,"<b>Incorrect.</b> Correct answer: "+esc(q.answer)+". "+esc(q.why)+extras(q));
+    }else{
+      var sel=box.querySelector("input:checked");
+      var labels=box.querySelectorAll("label.choice");
+      labels[q.answerIdx].classList.add("correct");
+      if(sel){
+        answered++;var ch=parseInt(sel.value,10);
+        if(ch===q.answerIdx){correct++;setFb(box,true,esc(q.reasons[q.answerIdx])+extras(q));}
+        else{labels[ch].classList.add("incorrect");setFb(box,false,esc(q.reasons[ch])+" The correct answer is "+LETTERS[q.answerIdx]+". "+extras(q));}
+      }else setFb(box,false,"<b>No answer selected.</b> Correct answer: "+LETTERS[q.answerIdx]+". "+esc(q.reasons[q.answerIdx])+extras(q));
+    }
+  });
+  var msg;
+  if(correct>=10)msg="Excellent — you are ready for second-module geometry items.";
+  else if(correct>=7)msg="On track for 600+. Review the ★ items and re-check tomorrow.";
+  else msg="Re-read the Study Notes, then reset and repeat this set untimed (support tier).";
+  $("ex-score").innerHTML="Score: "+correct+" / "+DATA.exercises.length+". "+msg+" Items attempted: "+answered+"/"+DATA.exercises.length+".";
+  $("ex-check").disabled=true;$("ex-check").hidden=true;$("ex-reset").hidden=false;
+  $("ex-score").scrollIntoView({block:"nearest"});
+}
+
+/* ---------- Mock ---------- */
+var running=false,timerId=null,remaining=0;
+function clockText(){var m=Math.floor(remaining/60),s=remaining%60;return m+":"+(s<10?"0":"")+s;}
+function updateClock(){$("mock-clock").textContent=clockText();}
+function renderMock(disabled){
+  var host=$("mock-items");host.innerHTML="";
+  DATA.mock.forEach(function(q,i){host.appendChild(renderItem(q,i,"mk",disabled));});
+}
+function estimate(raw){
+  var est="Below 580";
+  DATA.scoring.forEach(function(s){if(raw>=s.raw)est=s.est;});
+  return est;
+}
+function startMock(){
+  running=true;remaining=DATA.meta.mockMinutes*60;
+  renderMock(false);
+  $("mock-start").disabled=true;$("mock-submit").disabled=false;
+  $("mock-live").textContent="Mock in progress. Timer started at 12:00.";
+  updateClock();
+  timerId=setInterval(function(){
+    remaining--;
+    if(remaining<=60)$("mock-clock").classList.add("low");
+    if(remaining<=0){remaining=0;updateClock();submitMock(true);}
+    else updateClock();
+  },1000);
+}
+function submitMock(auto){
+  if(!running)return;
+  running=false;if(timerId){clearInterval(timerId);timerId=null;}
+  var correct=0,review=$("mock-review");review.innerHTML="";
+  DATA.mock.forEach(function(q,i){
+    var box=$("mkq"+i),your,ok=false;
+    if(q.spr){
+      var v=box.querySelector("input").value;your=v.trim()||"(blank)";ok=sprMatches(v,q);
+    }else{
+      var sel=box.querySelector("input:checked");
+      if(sel){var ch=parseInt(sel.value,10);your=LETTERS[ch]+" ("+q.choices[ch]+")";ok=ch===q.answerIdx;}
+      else your="(blank)";
+    }
+    if(ok)correct++;
+    var ans=q.spr?q.answer:LETTERS[q.answerIdx]+" ("+q.choices[q.answerIdx]+")";
+    var why=q.spr?q.why:q.reasons[q.answerIdx];
+    var item=el("div","reviewItem");
+    item.innerHTML=(ok?"<b>✓ Correct.</b> ":"<b>✗ Incorrect.</b> ")+"<b>Item "+(i+1)+"</b> — Your answer: "+esc(your)+" | Correct answer: "+esc(ans)+". "+esc(why)+extras(q);
+    review.appendChild(item);
+  });
+  var inputs=document.querySelectorAll("#mock-items input");
+  for(var k=0;k<inputs.length;k++)inputs[k].disabled=true;
+  $("mock-live").textContent=(auto?"Time is up — the mock was submitted automatically. ":"")+"Raw score: "+correct+" / "+DATA.meta.mockCount+".";
+  var sb=el("div","scorebox","Raw Score: "+correct+" / "+DATA.meta.mockCount+" — Estimated Digital SAT Math Section Score: "+esc(estimate(correct))+" (approximate; open the Scoring Guide below for interpretation).");
+  review.insertBefore(sb,review.firstChild);
+  $("mock-submit").disabled=true;$("mock-start").hidden=true;$("mock-reset").hidden=false;
+  sb.scrollIntoView({block:"nearest"});
+}
+function resetMock(){
+  if(timerId){clearInterval(timerId);timerId=null;}
+  running=false;
+  $("mock-clock").classList.remove("low");remaining=DATA.meta.mockMinutes*60;updateClock();
+  renderMock(true);
+  $("mock-review").innerHTML="";$("mock-live").textContent="";
+  $("mock-start").disabled=false;$("mock-start").hidden=false;
+  $("mock-submit").disabled=true;$("mock-reset").hidden=true;
+}
+
+/* ---------- Wiring ---------- */
+$("ex-check").addEventListener("click",checkExercises);
+$("ex-reset").addEventListener("click",renderExercises);
+$("mock-start").addEventListener("click",startMock);
+$("mock-submit").addEventListener("click",function(){submitMock(false);});
+$("mock-reset").addEventListener("click",resetMock);
+window.addEventListener("beforeunload",function(e){if(running){e.preventDefault();e.returnValue="";}});
+renderExercises();
+renderMock(true);
+})();
+</script>
+</body>
+</html>
